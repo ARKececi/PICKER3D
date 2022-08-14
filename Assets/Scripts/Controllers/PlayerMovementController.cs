@@ -26,6 +26,12 @@ namespace Controllers
 
         #endregion
 
+        #region Private Variables
+
+        private bool _stationBool;
+
+        #endregion
+
         #endregion
 
         public void movementcontroller(HorizontalInputParams inputParams)
@@ -34,10 +40,29 @@ namespace Controllers
             _clamp = inputParams.ClampValues;
         }
 
+        public void station(StationBoolParams station)
+        {
+            _stationBool = station.StationBool;
+            
+            if (_stationBool)
+            {
+                _move.isKinematic = true;
+            }
+            else
+            {
+                _move.isKinematic = false;
+            }
+        }
+
         private void FixedUpdate()
         {
+
+
+
             _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
-            _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp
+            _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp 
+            
+
         }
     }
 }

@@ -28,11 +28,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputDragged += movement;
+            CoreGameSignals.Instance.onStation += station;
         }
 
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputDragged -= movement;
+            CoreGameSignals.Instance.onStation -= station;
+
         }
 
         private void OnDisable()
@@ -45,6 +48,11 @@ namespace Managers
         private void movement(HorizontalInputParams horizontalInputParams)
         {
             playerMovementController.movementcontroller(horizontalInputParams);
+        }
+
+        private void station(StationBoolParams stationBoolParams)
+        {
+            playerMovementController.station(stationBoolParams);
         }
     }
 }
