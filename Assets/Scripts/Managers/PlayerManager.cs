@@ -27,14 +27,14 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onInputDragged += movement;
-            CoreGameSignals.Instance.onStation += station;
+            InputSignals.Instance.onInputDragged += OnMovement;
+            CoreGameSignals.Instance.onStation += OnStation;
         }
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onInputDragged -= movement;
-            CoreGameSignals.Instance.onStation -= station;
+            InputSignals.Instance.onInputDragged -= OnMovement;
+            CoreGameSignals.Instance.onStation -= OnStation;
 
         }
 
@@ -45,12 +45,12 @@ namespace Managers
 
         #endregion
 
-        private void movement(HorizontalInputParams horizontalInputParams)
+        private void OnMovement(HorizontalInputParams horizontalInputParams)
         {
             playerMovementController.movementcontroller(horizontalInputParams);
         }
 
-        private void station(StationBoolParams stationBoolParams)
+        private void OnStation(StationBoolParams stationBoolParams)
         {
             playerMovementController.station(stationBoolParams);
         }

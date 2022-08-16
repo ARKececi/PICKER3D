@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.ValueObject;
 using UnityEngine;
 
 namespace Controllers
@@ -6,6 +7,12 @@ namespace Controllers
     public class PoolController : MonoBehaviour
     {
         #region Self Variables
+
+        #region Public Variables
+
+        [Header("Stage Data")] public StageData PoolData;
+
+        #endregion
 
         #region Private Variables
 

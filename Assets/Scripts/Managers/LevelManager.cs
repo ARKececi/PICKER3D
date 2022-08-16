@@ -1,4 +1,7 @@
 ﻿using System;
+using Controllers;
+using Data.UnityObject;
+using Data.ValueObject;
 using UnityEngine;
 
 namespace Managers
@@ -7,9 +10,21 @@ namespace Managers
     {
         #region Self Variables
 
+        #region Public Variables
+
+        #endregion
+
         #region Serialized Variables
 
-        private GameObject _triggerObject;
+        [SerializeField] private GameObject levelHolder;
+
+        [SerializeField] private LevelLoaderCommand levelLoader;
+
+        #endregion
+
+        #region Private Variables
+
+        [SerializeField] private int _levelID;
 
         #endregion
 
@@ -38,8 +53,15 @@ namespace Managers
         }
 
         #endregion
-        
-        
-        
+
+        private void Start()
+        {
+            OnLoaderLevel();
+        }
+
+        private void OnLoaderLevel()
+        {
+            levelLoader.LoaderLevel(_levelID, levelHolder.transform);
+        }
     }
 }

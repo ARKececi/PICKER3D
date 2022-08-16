@@ -44,24 +44,19 @@ namespace Controllers
         {
             _stationBool = station.StationBool;
             
-            if (_stationBool)
-            {
-                _move.isKinematic = true;
-            }
-            else
-            {
-                _move.isKinematic = false;
-            }
         }
 
         private void FixedUpdate()
         {
-
-
-
-            _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
-            _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp 
-            
+            if (!_stationBool)
+            {
+                _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
+                _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp  
+            }
+            else
+            {
+                _move.velocity = Vector3.zero;
+            }
 
         }
     }

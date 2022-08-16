@@ -25,12 +25,10 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                
                 CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
                 {
                     StationBool = true
                 });
-               
             }
         }
     }
