@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 6679359671973988806}
   m_Layer: 0
   m_Name: Station
-  m_TagString: Untagged
+  m_TagString: Station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -487,11 +487,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6679359671973988807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.1206603, y: 4.665098, z: 37.125965}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.113298744, y: 0.31828767, z: -0.7662674}
+  m_LocalScale: {x: 0.11111112, y: 0.2, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 6679359673100941017}
-  m_RootOrder: 5
+  m_Father: {fileID: 6679359673460247725}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6679359671973988801
 BoxCollider:
@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 6679359672197909438}
   - component: {fileID: 6679359672197909432}
   - component: {fileID: 6679359672197909433}
+  - component: {fileID: 5013864271078020373}
   m_Layer: 0
   m_Name: PlayerPhysic
   m_TagString: Player
@@ -674,6 +675,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5013864271078020373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6679359672197909439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8fc8a4c602e4dcf9504bf78738e3222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6679359672269714220
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1007,7 @@ Transform:
   - {fileID: 7534045308487479661}
   - {fileID: 6679359672197909438}
   m_Father: {fileID: 6679359673100941017}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6679359673074950123
 MeshFilter:
@@ -1122,7 +1135,6 @@ Transform:
   - {fileID: 6679359671773114272}
   - {fileID: 6679359673460673196}
   - {fileID: 6679359671791737191}
-  - {fileID: 6679359671973988800}
   - {fileID: 6679359673074950122}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1480,7 +1492,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.140349, y: 3.07366, z: 44.78864}
   m_LocalScale: {x: 9, y: 5, z: 10}
-  m_Children: []
+  m_Children:
+  - {fileID: 6679359671973988800}
   m_Father: {fileID: 6679359673100941017}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1509,6 +1522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50e4315455c445994c86219f8e7a415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PoolData:
+    RequiredBallCount: 5
+  stageID: 0
 --- !u!1 &6679359673460673104
 GameObject:
   m_ObjectHideFlags: 0

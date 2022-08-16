@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26d2d29b2af44997a70d1d0d90649c4a, type: 3}
   m_Name: SO_Level
   m_EditorClassIdentifier: 
-  Levels: []
+  Levels:
+  - StageList:
+    - RequiredBallCount: 2

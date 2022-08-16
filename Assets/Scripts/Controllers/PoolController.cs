@@ -1,5 +1,9 @@
 ﻿using System;
+using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
+using Keys;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -20,8 +24,22 @@ namespace Controllers
 
         #endregion
 
+        #region Serialized Variables
+
+        [SerializeField] private int stageID;
+
         #endregion
 
+        #endregion
+
+        private void Awake()
+        {
+            PoolData = GetPoolData();
+        }
+
+        private StageData GetPoolData() => Resources.Load<SO_Level>("Data/SO_Level").Levels[CoreGameSignals.Instance.onPoolLevelID() % Resources.Load<SO_Level>("Data/SO_Level")
+            .Levels.Count].StageList[stageID];
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Ball"))
@@ -29,5 +47,28 @@ namespace Controllers
                 _ballCount++;
             }
         }
+
+        public void OnBallController()
+        {
+            if (_ballCount >= PoolData.RequiredBallCount)
+            {
+                DOVirtual.DelayedCall(2, () =>
+                    CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
+                    {
+                        StationBool = false
+                    }));
+                Debug.Log("başarılı");
+                Debug.Log(_ballCount);
+            }
+            OnBallCountZero();
+            
+            Debug.Log(_ballCount);
+        }
+
+        private void OnBallCountZero()
+        {
+            _ballCount = 0;
+        }
+        
     }
 }

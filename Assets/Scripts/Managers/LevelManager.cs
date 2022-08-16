@@ -2,6 +2,7 @@
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -39,12 +40,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-
+            CoreGameSignals.Instance.onPoolLevelID += OnPoolLevelID;
         }
 
         private void UnsubscribeEvents()
         {
-
+            CoreGameSignals.Instance.onPoolLevelID -= OnPoolLevelID;
         }
 
         private void OnDisable()
@@ -53,6 +54,11 @@ namespace Managers
         }
 
         #endregion
+
+        private int OnPoolLevelID()
+        {
+            return _levelID;
+        }
 
         private void Start()
         {
