@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
@@ -27,6 +28,8 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private int stageID;
+        
+        [SerializeField] private List<DOTweenAnimation> animationList;
 
         #endregion
 
@@ -52,13 +55,19 @@ namespace Controllers
         {
             if (_ballCount >= PoolData.RequiredBallCount)
             {
+                foreach (var animation in animationList)
+                {
+                    animation.DOPlay();
+                }
                 DOVirtual.DelayedCall(2, () =>
                     CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
                     {
                         StationBool = false
                     }));
                 Debug.Log("başarılı");
+                
                 Debug.Log(_ballCount);
+                
             }
             OnBallCountZero();
             

@@ -69,5 +69,7 @@ namespace Managers
         {
             levelLoader.LoaderLevel(_levelID, levelHolder.transform);
         }
+
+
     }
 }
