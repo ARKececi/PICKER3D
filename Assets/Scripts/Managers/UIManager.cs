@@ -1,17 +1,19 @@
-﻿using System;
-using Cinemachine;
+﻿using System.Collections.Generic;
+using Controllers;
+using Enums;
+using Keys;
 using Signals;
 using UnityEngine;
 
 namespace Managers
 {
-    public class CameraManager : MonoBehaviour
+    public class UIManager : MonoBehaviour
     {
         #region Self Variables
 
         #region Serialized Variables
 
-        [SerializeField] private CinemachineVirtualCamera _vmCamera;
+        [SerializeField] private UIPanelController panelcontroller;
 
         #endregion
 
@@ -27,13 +29,11 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
-
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
-
         }
 
         private void OnDisable()
@@ -42,16 +42,19 @@ namespace Managers
         }
 
         #endregion
-
+        
         private void OnPlay()
         {
-            OnSetCamera();
+            CoreGameSignals.Instance.onIsTouching.Invoke(new IsTouching()
+            {
+                IsTouchingPlayer = true
+            });
+            panelcontroller.OnClosePanel(UIPanel.StartButton);
         }
-
-        private void OnSetCamera()
+        
+        public void Play()
         {
-            var player = FindObjectOfType<PlayerManager>().transform;
-            _vmCamera.Follow = player;
+            CoreGameSignals.Instance.onPlay?.Invoke();
         }
     }
 }

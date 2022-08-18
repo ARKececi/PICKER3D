@@ -30,10 +30,18 @@ namespace Controllers
 
         private bool _stationBool;
 
-        #endregion
+        private bool _isTouchingPlayer;
 
         #endregion
 
+        #endregion
+
+
+        public void IsTouchingPlayer(IsTouching touchparams)
+        {
+            _isTouchingPlayer = touchparams.IsTouchingPlayer;
+        }
+        
         public void movementcontroller(HorizontalInputParams inputParams)
         {
             _inputforce = inputParams.XValue;
@@ -48,15 +56,19 @@ namespace Controllers
 
         private void FixedUpdate()
         {
-            if (!_stationBool)
+            if (_isTouchingPlayer)
             {
-                _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
-                _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp  
+                if (!_stationBool)
+                {
+                    _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
+                    _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp  
+                }
+                else
+                {
+                    _move.velocity = Vector3.zero;
+                }
             }
-            else
-            {
-                _move.velocity = Vector3.zero;
-            }
+
 
         }
     }

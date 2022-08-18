@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/97/cd98539c/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/edef46c9b2db4b878c98495bfdc516fa568ba8/79/ef973d44/List`1.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -71,6 +72,9 @@
       <workItem from="1660582435383" duration="6610000" />
       <workItem from="1660637493975" duration="10761000" />
       <workItem from="1660722611882" duration="14058000" />
+      <workItem from="1660760543850" duration="616000" />
+      <workItem from="1660808046674" duration="12762000" />
+      <workItem from="1660848839057" duration="4798000" />
     </task>
     <servers />
   </component>

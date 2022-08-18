@@ -15,3 +15,4 @@ MonoBehaviour:
   Levels:
   - StageList:
     - RequiredBallCount: 1
+    - RequiredBallCount: 2

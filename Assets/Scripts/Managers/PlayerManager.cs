@@ -29,13 +29,14 @@ namespace Managers
         {
             InputSignals.Instance.onInputDragged += OnMovement;
             CoreGameSignals.Instance.onStation += OnStation;
+            CoreGameSignals.Instance.onIsTouching += onTouching;
         }
 
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputDragged -= OnMovement;
             CoreGameSignals.Instance.onStation -= OnStation;
-
+            CoreGameSignals.Instance.onIsTouching -= onTouching;
         }
 
         private void OnDisable()
@@ -44,6 +45,11 @@ namespace Managers
         }
 
         #endregion
+        
+        private void onTouching(IsTouching isTouchparams)
+        {
+            playerMovementController.IsTouchingPlayer(isTouchparams);
+        }
 
         private void OnMovement(HorizontalInputParams horizontalInputParams)
         {
