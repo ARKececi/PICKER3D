@@ -60,7 +60,7 @@ namespace Controllers
                     animation.DOPlay();
                 }
                 DOVirtual.DelayedCall(2, () =>
-                    CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
+                    CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
                     {
                         StationBool = false
                     }));
@@ -68,6 +68,11 @@ namespace Controllers
                 
                 Debug.Log(_ballCount);
                 
+            }
+
+            else
+            {
+                UISignals.Instance.onFail?.Invoke();
             }
             OnBallCountZero();
             

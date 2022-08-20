@@ -7,6 +7,6 @@ namespace Signals
 {
     public class UISignals : MonoSingleton<UISignals>
     {
-
+        public UnityAction onFail =delegate { };
     }
 }

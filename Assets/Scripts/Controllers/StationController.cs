@@ -7,19 +7,6 @@ namespace Controllers
 {
     public class StationController : MonoBehaviour
     {
-        #region Self Variables
-
-        #region Serialized Variables
-
-        #endregion
-
-        #region Private Variables
-
-       
-
-        #endregion
-
-        #endregion
 
         private void OnTriggerEnter(Collider other)
         {

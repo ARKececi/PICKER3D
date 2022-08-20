@@ -2,6 +2,7 @@
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using Keys;
 using Signals;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ namespace Managers
         [SerializeField] private GameObject levelHolder;
 
         [SerializeField] private LevelLoaderCommand levelLoader;
+
+        [SerializeField] private ClearlevelController clearLevel;
 
         #endregion
 
@@ -41,11 +44,17 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onPoolLevelID += OnPoolLevelID;
+            CoreGameSignals.Instance.onLoaderLevel += OnLoaderLevel;
+            CoreGameSignals.Instance.onClearLevel += OnClearLevel;
+            CoreGameSignals.Instance.onWinLevelID += WinLevelID;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPoolLevelID -= OnPoolLevelID;
+            CoreGameSignals.Instance.onLoaderLevel -= OnLoaderLevel;
+            CoreGameSignals.Instance.onClearLevel -= OnClearLevel;
+            CoreGameSignals.Instance.onWinLevelID -= WinLevelID;
         }
 
         private void OnDisable()
@@ -65,9 +74,20 @@ namespace Managers
             OnLoaderLevel();
         }
 
+        private void WinLevelID(WinLevelParams levelID)
+        {
+            _levelID = levelID.WinLevel;
+        }
+
         private void OnLoaderLevel()
         {
             levelLoader.LoaderLevel(_levelID, levelHolder.transform);
+        }
+
+        private void OnClearLevel()
+        {
+            
+            clearLevel.ClearLevel(levelHolder.transform);
         }
 
 

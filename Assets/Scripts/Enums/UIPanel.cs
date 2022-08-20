@@ -2,6 +2,8 @@
 {
     public enum UIPanel
     {
-        StartButton
+        StartButton,
+        FailButton,
+        WinButton
     }
 }
