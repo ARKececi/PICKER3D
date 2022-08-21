@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
 using Managers;
@@ -14,7 +15,7 @@ namespace Controllers
 
         [SerializeField] private Rigidbody _move;
 
-        [SerializeField] private PlayerData _playerControllerData;
+        [Header("Data")] public PlayerData _playerControllerData;
         
         #endregion
 
@@ -36,6 +37,12 @@ namespace Controllers
 
         #endregion
 
+        private void Start()
+        {
+            _playerControllerData = GetInputData();
+        }
+
+        private PlayerData GetInputData() => Resources.Load<SO_Player>("Data/SO_Player").playerData;
 
         public void IsTouchingPlayer(IsTouching touchparams)
         {
@@ -68,8 +75,7 @@ namespace Controllers
                     _move.velocity = Vector3.zero;
                 }
             }
-
-
+            
         }
     }
 }

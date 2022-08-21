@@ -6,7 +6,7 @@ namespace Data.ValueObject
     public class PlayerData
     {
         public float _movementSide = 10;
-        public float MoveSpeed = 5;
+        public float MoveSpeed = 100;
 
     }
 }
