@@ -14,9 +14,15 @@ namespace Signals
         public UnityAction onReset = delegate { };
         public UnityAction onWin =delegate { };
         public UnityAction<WinLevelParams> onWinLevelID = delegate { };
-        public UnityAction onCameraMovePosition = delegate { };
+
         public UnityAction onLoaderLevel = delegate { };
         public UnityAction onClearLevel = delegate { };
+        public UnityAction onLoaderPlayer = delegate { };
+        
+        public UnityAction onCameraMovePosition = delegate { };
+        public UnityAction onGetCameraPosition = delegate { };
+        public UnityAction onPlayerMovePosition = delegate { };
+        public UnityAction onGetPlayerPosition = delegate { };
 
         public Func<int> onPoolLevelID = delegate { return 0; };
         

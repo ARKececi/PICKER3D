@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - StageList:
-    - RequiredBallCount: 1
+    - RequiredBallCount: 2
+    - RequiredBallCount: 2
     - RequiredBallCount: 2

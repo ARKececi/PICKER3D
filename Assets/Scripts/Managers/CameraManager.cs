@@ -30,7 +30,7 @@ namespace Managers
 
         private void Awake()
         {
-            GetCameraPosition();
+            OnGetCameraPosition();
         }
 
         private void OnEnable()
@@ -42,12 +42,14 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onCameraMovePosition += OnCameraMovePosition;
+            CoreGameSignals.Instance.onGetCameraPosition += OnGetCameraPosition;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onCameraMovePosition -= OnCameraMovePosition;
+            CoreGameSignals.Instance.onGetCameraPosition += OnGetCameraPosition;
         }
 
         private void OnDisable()
@@ -57,7 +59,7 @@ namespace Managers
 
         #endregion
 
-        private void GetCameraPosition()
+        private void OnGetCameraPosition()
         {
             _vmCameraPosition = _vmcamera.transform.localPosition;
         }

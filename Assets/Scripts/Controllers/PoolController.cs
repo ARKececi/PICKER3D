@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
 using Keys;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Controllers
@@ -28,6 +28,8 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private int stageID;
+
+        [SerializeField] private TextMeshPro text;
         
         [SerializeField] private List<DOTweenAnimation> animationList;
 
@@ -42,12 +44,18 @@ namespace Controllers
 
         private StageData GetPoolData() => Resources.Load<SO_Level>("Data/SO_Level").Levels[CoreGameSignals.Instance.onPoolLevelID() % Resources.Load<SO_Level>("Data/SO_Level")
             .Levels.Count].StageList[stageID];
+
+        private void CountBall()
+        {
+            text.text = $"{_ballCount}/{PoolData.RequiredBallCount}";
+        }
         
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Ball"))
             {
                 _ballCount++;
+                CountBall();
             }
         }
 

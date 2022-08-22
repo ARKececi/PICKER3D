@@ -62,6 +62,10 @@ namespace Managers
             {
                 IsTouchingPlayer = true
             });
+            CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
+            {
+                StationBool = false
+            });
             panelcontroller.OnClosePanel(UIPanel.StartButton);
         }
 
@@ -79,7 +83,10 @@ namespace Managers
         {
             CoreGameSignals.Instance.onClearLevel?.Invoke();
             CoreGameSignals.Instance.onLoaderLevel?.Invoke();
+            
             CoreGameSignals.Instance.onCameraMovePosition?.Invoke();
+            CoreGameSignals.Instance.onPlayerMovePosition?.Invoke();
+            
             panelcontroller.OnClosePanel(UIPanel.FailButton);
             panelcontroller.OnOpenPanel(UIPanel.StartButton);
         }
@@ -95,7 +102,16 @@ namespace Managers
             
             panelcontroller.OnClosePanel(UIPanel.WinButton);
             
-            CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onClearLevel?.Invoke();
+            CoreGameSignals.Instance.onLoaderLevel?.Invoke();
+
+            CoreGameSignals.Instance.onGetCameraPosition?.Invoke();
+            CoreGameSignals.Instance.onGetPlayerPosition?.Invoke();
+            
+            CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
+            {
+                StationBool = false
+            });
         }
         
         public void Play()

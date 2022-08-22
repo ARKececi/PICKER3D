@@ -13,6 +13,16 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController playerMovementController;
+        
+        [SerializeField] private GameObject PlayerHolder;
+        
+        [SerializeField] private PlayerLoaderCommand PlayerLoader;
+
+        #endregion
+
+        #region Private Variables
+
+        private Vector3 _playerPosition;
 
         #endregion
 
@@ -30,6 +40,9 @@ namespace Managers
             InputSignals.Instance.onInputDragged += OnMovement;
             CoreGameSignals.Instance.onStation += OnStation;
             CoreGameSignals.Instance.onIsTouching += onTouching;
+            CoreGameSignals.Instance.onLoaderPlayer += OnLoaderPlayer;
+            CoreGameSignals.Instance.onPlayerMovePosition += OnPlayerMovePosition;
+            CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
         }
 
         private void UnsubscribeEvents()
@@ -37,6 +50,9 @@ namespace Managers
             InputSignals.Instance.onInputDragged -= OnMovement;
             CoreGameSignals.Instance.onStation -= OnStation;
             CoreGameSignals.Instance.onIsTouching -= onTouching;
+            CoreGameSignals.Instance.onLoaderPlayer -= OnLoaderPlayer;
+            CoreGameSignals.Instance.onPlayerMovePosition -= OnPlayerMovePosition;
+            CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
         }
 
         private void OnDisable()
@@ -45,6 +61,27 @@ namespace Managers
         }
 
         #endregion
+
+        private void Start()
+        {
+            OnLoaderPlayer();
+            OnGetPlayerPosition();
+        }
+        
+        private void OnGetPlayerPosition()
+        {
+            _playerPosition = PlayerHolder.transform.localPosition;
+        }
+
+        private void OnPlayerMovePosition()
+        {
+            PlayerHolder.transform.localPosition = _playerPosition;
+        }
+
+        private void OnLoaderPlayer()
+        {
+            PlayerLoader.LoaderPlayer(PlayerHolder.transform);
+        }
         
         private void onTouching(IsTouching isTouchparams)
         {

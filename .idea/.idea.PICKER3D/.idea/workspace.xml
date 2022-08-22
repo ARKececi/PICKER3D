@@ -10,6 +10,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/6e/23736f88/Transform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/97/cd98539c/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/c5/bc152baf/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/edef46c9b2db4b878c98495bfdc516fa568ba8/79/ef973d44/List`1.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -80,6 +81,10 @@
       <workItem from="1660982266110" duration="21630000" />
       <workItem from="1661031498325" duration="1907000" />
       <workItem from="1661079358698" duration="5168000" />
+      <workItem from="1661114082031" duration="1639000" />
+      <workItem from="1661154446149" duration="5700000" />
+      <workItem from="1661172888334" duration="2319000" />
+      <workItem from="1661185594837" duration="8381000" />
     </task>
     <servers />
   </component>
