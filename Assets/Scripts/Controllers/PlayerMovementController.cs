@@ -44,6 +44,10 @@ namespace Controllers
 
         private PlayerData GetInputData() => Resources.Load<SO_Player>("Data/SO_Player").playerData;
 
+        public Rigidbody rigidbody()
+        {
+            return _move;
+        }
         public void IsTouchingPlayer(IsTouching touchparams)
         {
             _isTouchingPlayer = touchparams.IsTouchingPlayer;

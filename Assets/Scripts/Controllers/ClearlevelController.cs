@@ -10,7 +10,6 @@ namespace Controllers
         {
             DOTween.KillAll();
             Destroy(levelHolder.GetChild(0).gameObject);
-            //SceneManager.LoadScene(0);
         }
     }
 }

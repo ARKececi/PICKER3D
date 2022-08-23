@@ -22,7 +22,7 @@ namespace Managers
 
         [SerializeField] private LevelLoaderCommand levelLoader;
 
-        [SerializeField] private ClearlevelController clearLevel;
+        [SerializeField] private ClearlevelController clearlevel;
 
         #endregion
 
@@ -86,8 +86,7 @@ namespace Managers
 
         private void OnClearLevel()
         {
-            
-            clearLevel.ClearLevel(levelHolder.transform);
+            clearlevel.ClearLevel(levelHolder.transform);
         }
 
 

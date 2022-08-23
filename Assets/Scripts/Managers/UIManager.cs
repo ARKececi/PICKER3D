@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Controllers;
+using DG.Tweening;
 using Enums;
 using Keys;
 using Signals;
@@ -101,8 +102,8 @@ namespace Managers
             });
             
             panelcontroller.OnClosePanel(UIPanel.WinButton);
-            
-            CoreGameSignals.Instance.onClearLevel?.Invoke();
+
+            DOVirtual.DelayedCall(3, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
             CoreGameSignals.Instance.onLoaderLevel?.Invoke();
 
             CoreGameSignals.Instance.onGetCameraPosition?.Invoke();

@@ -1,5 +1,6 @@
 ﻿using System;
 using Controllers;
+using DG.Tweening;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Managers
         #region Private Variables
 
         private Vector3 _playerPosition;
+        private Quaternion _playerRotation;
+        private Rigidbody _player;
 
         #endregion
 
@@ -43,6 +46,7 @@ namespace Managers
             CoreGameSignals.Instance.onLoaderPlayer += OnLoaderPlayer;
             CoreGameSignals.Instance.onPlayerMovePosition += OnPlayerMovePosition;
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
+            CoreGameSignals.Instance.onPozitionAndRotationFreeze += OnPozitionAndRotationFreeze;
         }
 
         private void UnsubscribeEvents()
@@ -53,6 +57,7 @@ namespace Managers
             CoreGameSignals.Instance.onLoaderPlayer -= OnLoaderPlayer;
             CoreGameSignals.Instance.onPlayerMovePosition -= OnPlayerMovePosition;
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
+            CoreGameSignals.Instance.onPozitionAndRotationFreeze -= OnPozitionAndRotationFreeze;
         }
 
         private void OnDisable()
@@ -66,7 +71,29 @@ namespace Managers
         {
             OnLoaderPlayer();
             OnGetPlayerPosition();
+            OnGetPlayerRotation();
         }
+
+        private void OnPozitionAndRotationFreeze()
+        {
+            
+            _player = playerMovementController.rigidbody();
+            _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            
+            
+            _player.useGravity = true;
+        }
+        
+        private void OnGetPlayerRotation()
+        {
+            _playerRotation = PlayerHolder.transform.localRotation;
+        }
+
+        private void OnPlayerMoveRotation()
+        {
+            PlayerHolder.transform.localRotation = _playerRotation;
+        }
+
         
         private void OnGetPlayerPosition()
         {

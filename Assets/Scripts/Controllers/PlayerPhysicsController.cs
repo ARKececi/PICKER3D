@@ -27,6 +27,7 @@ namespace Controllers
             if (other.CompareTag(("WinStation")))
             {
                 CoreGameSignals.Instance.onWin?.Invoke();
+                CoreGameSignals.Instance.onPozitionAndRotationFreeze?.Invoke();
             }
         }
     }

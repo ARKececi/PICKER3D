@@ -19,6 +19,8 @@ namespace Signals
         public UnityAction onClearLevel = delegate { };
         public UnityAction onLoaderPlayer = delegate { };
         
+        public UnityAction onPozitionAndRotationFreeze = delegate { };
+        
         public UnityAction onCameraMovePosition = delegate { };
         public UnityAction onGetCameraPosition = delegate { };
         public UnityAction onPlayerMovePosition = delegate { };
