@@ -15,8 +15,10 @@ namespace Controllers
 
         [SerializeField] private Rigidbody _move;
 
-        [Header("Data")] public PlayerData _playerControllerData;
+        [SerializeField] private GameObject _player;
         
+        [Header("Data")] public PlayerData _playerControllerData;
+
         #endregion
 
         #region Private Variables
@@ -65,6 +67,14 @@ namespace Controllers
             
         }
 
+        public void PlayerRotationClamp()
+        {
+            Vector3 currentRotation = _player.transform.localEulerAngles;
+            currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 30);
+            _player.transform.eulerAngles = currentRotation;
+            
+        }
+
         private void FixedUpdate()
         {
             if (_isTouchingPlayer)
@@ -72,7 +82,14 @@ namespace Controllers
                 if (!_stationBool)
                 {
                     _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
-                    _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp  
+                    _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp 
+                    
+                    if (_player.transform.eulerAngles.x < 60)
+                    {
+                        PlayerRotationClamp();
+                    }
+                        
+
                 }
                 else
                 {
