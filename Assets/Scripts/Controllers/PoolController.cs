@@ -31,7 +31,7 @@ namespace Controllers
 
         [SerializeField] private TextMeshPro text;
         
-        [SerializeField] private List<DOTweenAnimation> animationList;
+        [SerializeField] private DOTweenAnimation animationList;
 
         #endregion
 
@@ -63,10 +63,8 @@ namespace Controllers
         {
             if (_ballCount >= PoolData.RequiredBallCount)
             {
-                foreach (var animation in animationList)
-                {
-                    animation.DOPlay();
-                }
+                animationList.DOPlay();
+                
                 DOVirtual.DelayedCall(2, () =>
                     CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
                     {

@@ -25,6 +25,7 @@ namespace Signals
         public UnityAction onGetCameraPosition = delegate { };
         public UnityAction onPlayerMovePosition = delegate { };
         public UnityAction onGetPlayerPosition = delegate { };
+        public UnityAction onPlayerMoveRotation = delegate { }; 
 
         public Func<int> onPoolLevelID = delegate { return 0; };
         

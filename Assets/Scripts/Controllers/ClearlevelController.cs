@@ -8,7 +8,7 @@ namespace Controllers
     {
         public void ClearLevel(Transform levelHolder)
         {
-            DOTween.KillAll();
+            
             Destroy(levelHolder.GetChild(0).gameObject);
         }
     }

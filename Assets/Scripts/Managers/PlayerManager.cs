@@ -47,6 +47,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlayerMovePosition += OnPlayerMovePosition;
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
             CoreGameSignals.Instance.onPozitionAndRotationFreeze += OnPozitionAndRotationFreeze;
+            CoreGameSignals.Instance.onPlayerMoveRotation += OnPlayerMoveRotation;
         }
 
         private void UnsubscribeEvents()
@@ -58,6 +59,7 @@ namespace Managers
             CoreGameSignals.Instance.onPlayerMovePosition -= OnPlayerMovePosition;
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
             CoreGameSignals.Instance.onPozitionAndRotationFreeze -= OnPozitionAndRotationFreeze;
+            CoreGameSignals.Instance.onPlayerMoveRotation -= OnPlayerMoveRotation;
         }
 
         private void OnDisable()
@@ -92,6 +94,8 @@ namespace Managers
         private void OnPlayerMoveRotation()
         {
             PlayerHolder.transform.localRotation = _playerRotation;
+            _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY |RigidbodyConstraints.FreezeRotationX;
+            _player.useGravity = false;
         }
 
         

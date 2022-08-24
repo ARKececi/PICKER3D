@@ -64,13 +64,14 @@ namespace Controllers
         public void station(StationBoolParams station)
         {
             _stationBool = station.StationBool;
+            Debug.Log(_stationBool);
             
         }
 
         public void PlayerRotationClamp()
         {
             Vector3 currentRotation = _player.transform.localEulerAngles;
-            currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 30);
+            currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 20);
             _player.transform.eulerAngles = currentRotation;
             
         }

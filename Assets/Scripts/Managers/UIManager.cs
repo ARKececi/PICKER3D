@@ -87,6 +87,7 @@ namespace Managers
             
             CoreGameSignals.Instance.onCameraMovePosition?.Invoke();
             CoreGameSignals.Instance.onPlayerMovePosition?.Invoke();
+            CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke();
             
             panelcontroller.OnClosePanel(UIPanel.FailButton);
             panelcontroller.OnOpenPanel(UIPanel.StartButton);
