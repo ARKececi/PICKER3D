@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3596075528980742303}
   m_Layer: 0
   m_Name: Station
-  m_TagString: PlayerController
+  m_TagString: LevelStart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 8180051561210850570}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.0196887, y: -0.81156206, z: -87.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.8831, z: 1}
   m_Children: []
   m_Father: {fileID: 1604604269333194771}
   m_RootOrder: 5
@@ -162,6 +162,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1604604269333194771}
     m_Modifications:
+    - target: {fileID: 2911591204441839568, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: stageID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2911591204724063072, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -224,6 +228,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1604604269333194771}
     m_Modifications:
+    - target: {fileID: 2911591204441839568, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: stageID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2911591204724063072, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
       propertyPath: m_RootOrder
       value: 2

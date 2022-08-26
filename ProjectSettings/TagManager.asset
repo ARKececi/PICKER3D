@@ -7,7 +7,9 @@ TagManager:
   - Ball
   - Station
   - WinStation
+  - LevelStart
   - PlayerController
+  - PlayerBack
   layers:
   - Default
   - TransparentFX

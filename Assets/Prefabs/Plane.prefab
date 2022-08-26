@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &278005281505067116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5265867004587654564}
+  m_Layer: 0
+  m_Name: BallGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5265867004587654564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278005281505067116}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.29, z: 80.10712}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 878442109359942304}
+  m_Father: {fileID: 2911591204803371428}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2911591204724063075
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +159,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.29, z: -3.178864}
   m_LocalScale: {x: 1, y: 1, z: 0.1}
   m_Children:
-  - {fileID: 878442109359942304}
+  - {fileID: 5265867004587654564}
   m_Father: {fileID: 2911591204724063072}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -615,7 +646,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2911591204803371428}
+    m_TransformParent: {fileID: 5265867004587654564}
     m_Modifications:
     - target: {fileID: 43662191518620662, guid: 277b1ce5e5a93ad4381b391fcbffb6b7, type: 3}
       propertyPath: m_RootOrder
@@ -627,11 +658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43662191518620662, guid: 277b1ce5e5a93ad4381b391fcbffb6b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 43662191518620662, guid: 277b1ce5e5a93ad4381b391fcbffb6b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.53
+      value: -79.57712
       objectReference: {fileID: 0}
     - target: {fileID: 43662191518620662, guid: 277b1ce5e5a93ad4381b391fcbffb6b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -679,6 +710,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2911591204724063072}
     m_Modifications:
+    - target: {fileID: 4751239619673747224, guid: a91d7544d2d51474b91e995164c80004, type: 3}
+      propertyPath: Ball
+      value: 
+      objectReference: {fileID: 2911591204803371431}
     - target: {fileID: 4751239619673747226, guid: a91d7544d2d51474b91e995164c80004, type: 3}
       propertyPath: m_Name
       value: BallTrigger
@@ -726,6 +761,10 @@ PrefabInstance:
     - target: {fileID: 4751239619673747227, guid: a91d7544d2d51474b91e995164c80004, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4751239619709785865, guid: a91d7544d2d51474b91e995164c80004, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a91d7544d2d51474b91e995164c80004, type: 3}

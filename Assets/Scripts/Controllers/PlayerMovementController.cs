@@ -71,7 +71,7 @@ namespace Controllers
         public void PlayerRotationClamp()
         {
             Vector3 currentRotation = _player.transform.localEulerAngles;
-            currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 20);
+            currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 15);
             _player.transform.eulerAngles = currentRotation;
             
         }

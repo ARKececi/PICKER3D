@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using DG.Tweening;
@@ -32,6 +33,8 @@ namespace Controllers
         [SerializeField] private TextMeshPro text;
         
         [SerializeField] private DOTweenAnimation animationList;
+        
+        [SerializeField] private GameObject Ball;
 
         #endregion
 
@@ -42,12 +45,26 @@ namespace Controllers
             PoolData = GetPoolData();
         }
 
+        private void Start()
+        {
+            SetRequiredBallCount();
+        }
+
         private StageData GetPoolData() => Resources.Load<SO_Level>("Data/SO_Level").Levels[CoreGameSignals.Instance.onPoolLevelID() % Resources.Load<SO_Level>("Data/SO_Level")
             .Levels.Count].StageList[stageID];
 
+        private void SetRequiredBallCount()
+        {
+            text.text = $"0/{PoolData.RequiredBallCount}";
+        }
         private void CountBall()
         {
             text.text = $"{_ballCount}/{PoolData.RequiredBallCount}";
+        }
+
+        private void BallSetActive()
+        {
+            Ball.SetActive(false);
         }
         
         private void OnTriggerEnter(Collider other)
@@ -64,12 +81,13 @@ namespace Controllers
             if (_ballCount >= PoolData.RequiredBallCount)
             {
                 animationList.DOPlay();
-                
+                BallSetActive();
                 DOVirtual.DelayedCall(2, () =>
                     CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
                     {
                         StationBool = false
                     }));
+                
                 Debug.Log("başarılı");
                 
                 Debug.Log(_ballCount);

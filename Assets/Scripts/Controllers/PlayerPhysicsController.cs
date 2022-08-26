@@ -24,7 +24,7 @@ namespace Controllers
                 DOVirtual.DelayedCall(2, other.transform.parent.GetComponent<PoolController>().OnBallController);
             }
 
-            if (other.CompareTag("PlayerController"))
+            if (other.CompareTag("LevelStart"))
             {
                 DOVirtual.DelayedCall(1, () => CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke());
                 DOVirtual.DelayedCall(1, () =>
