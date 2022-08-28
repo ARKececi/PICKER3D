@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Keys;
+using Managers;
 using Signals;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Controllers
 
         #region Private Variables
 
-
+        private int _levelID;
 
         #endregion
 
@@ -26,19 +27,30 @@ namespace Controllers
 
             if (other.CompareTag("LevelStart"))
             {
-                DOVirtual.DelayedCall(1, () => CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke());
-                DOVirtual.DelayedCall(1, () =>
-                CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
+                /*int myInt = 0;
+                DOTween.To(() => myInt, x => myInt = x, 1, 0.6f).OnComplete(() =>
                 {
-                    StationBool = false
-                }));
-                DOVirtual.DelayedCall(1, () => CoreGameSignals.Instance.onGetPlayerPosition?.Invoke());
+                    CoreGameSignals.Instance.onStartLevelPlayer?.Invoke();
+                    Debug.Log("Burdayım");  
+                });*/
+                //DOVirtual.DelayedCall(1, () => CoreGameSignals.Instance.onStartLevelPlayer?.Invoke());
+                CoreGameSignals.Instance.onWin?.Invoke();
             }
 
             if (other.CompareTag(("WinStation")))
             {
-                CoreGameSignals.Instance.onWin?.Invoke();
+                _levelID = CoreGameSignals.Instance.onPoolLevelID();
+                _levelID += 1;
+                CoreGameSignals.Instance.onWinLevelID(new WinLevelParams()
+                {
+                    WinLevel = _levelID
+                });
+                
+                DOVirtual.DelayedCall(3, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
+                CoreGameSignals.Instance.onNextLevelLoader?.Invoke();
+                
                 CoreGameSignals.Instance.onPozitionAndRotationFreeze?.Invoke();
+                
             }
         }
     }

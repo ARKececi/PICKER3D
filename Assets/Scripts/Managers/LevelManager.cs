@@ -30,6 +30,14 @@ namespace Managers
 
         [SerializeField] private int _levelID;
 
+        private Vector3 _nextLevelTransform;
+
+        private Vector3 _startLevelTransform;
+
+        private int _level;
+
+        private GameObject ResetLevel;
+
         #endregion
 
         #endregion
@@ -47,6 +55,8 @@ namespace Managers
             CoreGameSignals.Instance.onLoaderLevel += OnLoaderLevel;
             CoreGameSignals.Instance.onClearLevel += OnClearLevel;
             CoreGameSignals.Instance.onWinLevelID += WinLevelID;
+            CoreGameSignals.Instance.onNextLevelLoader += OnNextLevelLoader;
+            CoreGameSignals.Instance.onResetLevel += OnResetLevel;
         }
 
         private void UnsubscribeEvents()
@@ -55,6 +65,8 @@ namespace Managers
             CoreGameSignals.Instance.onLoaderLevel -= OnLoaderLevel;
             CoreGameSignals.Instance.onClearLevel -= OnClearLevel;
             CoreGameSignals.Instance.onWinLevelID -= WinLevelID;
+            CoreGameSignals.Instance.onNextLevelLoader -= OnNextLevelLoader;
+            CoreGameSignals.Instance.onResetLevel += OnResetLevel;
         }
 
         private void OnDisable()
@@ -72,16 +84,39 @@ namespace Managers
         private void Start()
         {
             OnLoaderLevel();
+            _nextLevelTransform = new Vector3(0, 0, 435);
         }
-
+        
         private void WinLevelID(WinLevelParams levelID)
         {
-            _levelID = levelID.WinLevel;
+            _levelID = levelID.WinLevel % Resources.Load<SO_Level>("Data/SO_Level")
+                .Levels.Count;
         }
 
         private void OnLoaderLevel()
         {
             levelLoader.LoaderLevel(_levelID, levelHolder.transform);
+            
+        }
+
+        private void OnNextLevelLoader()
+        {
+            OnLoaderLevel();
+            _level++;
+            if (_level > 0)
+            {
+                levelHolder.transform.GetChild(1).position = _nextLevelTransform;
+                _startLevelTransform = _nextLevelTransform;
+                _nextLevelTransform += new Vector3(0, 0, 430);
+                
+            }
+            ResetLevel = levelHolder;
+        }
+
+        private void OnResetLevel()
+        {
+            OnLoaderLevel();
+            levelHolder.transform.GetChild(1).position = _startLevelTransform;
         }
 
         private void OnClearLevel()

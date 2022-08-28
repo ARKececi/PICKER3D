@@ -21,7 +21,7 @@ namespace Managers
 
         #region Private Variables
 
-        private int _levelID;
+
 
         #endregion
 
@@ -83,11 +83,11 @@ namespace Managers
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearLevel?.Invoke();
-            CoreGameSignals.Instance.onLoaderLevel?.Invoke();
+            CoreGameSignals.Instance.onResetLevel?.Invoke();
             
             CoreGameSignals.Instance.onCameraMovePosition?.Invoke();
             CoreGameSignals.Instance.onPlayerMovePosition?.Invoke();
-            CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke();
+            //CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke();
             
             panelcontroller.OnClosePanel(UIPanel.FailButton);
             panelcontroller.OnOpenPanel(UIPanel.StartButton);
@@ -95,20 +95,13 @@ namespace Managers
 
         public void Win()
         {
-            _levelID = CoreGameSignals.Instance.onPoolLevelID();
-            _levelID += 1;
-            CoreGameSignals.Instance.onWinLevelID(new WinLevelParams()
-            {
-                WinLevel = _levelID
-            });
-            
-            panelcontroller.OnClosePanel(UIPanel.WinButton);
 
-            DOVirtual.DelayedCall(3, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
-            CoreGameSignals.Instance.onLoaderLevel?.Invoke();
+            panelcontroller.OnClosePanel(UIPanel.WinButton);
+            
+            CoreGameSignals.Instance.onStartLevelPlayer?.Invoke();
 
             CoreGameSignals.Instance.onGetCameraPosition?.Invoke();
-            CoreGameSignals.Instance.onGetPlayerPosition?.Invoke();
+            CoreGameSignals.Instance.onGetPlayerPosition?.Invoke(); 
             
             CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
             {

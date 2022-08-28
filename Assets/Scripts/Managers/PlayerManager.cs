@@ -19,6 +19,8 @@ namespace Managers
         
         [SerializeField] private PlayerLoaderCommand PlayerLoader;
 
+        [SerializeField] private DOTweenAnimation Animation;
+
         #endregion
 
         #region Private Variables
@@ -26,6 +28,12 @@ namespace Managers
         private Vector3 _playerPosition;
         private Quaternion _playerRotation;
         private Rigidbody _player;
+
+        #endregion
+
+        #region Public Variables
+
+        
 
         #endregion
 
@@ -48,6 +56,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
             CoreGameSignals.Instance.onPozitionAndRotationFreeze += OnPozitionAndRotationFreeze;
             CoreGameSignals.Instance.onPlayerMoveRotation += OnPlayerMoveRotation;
+            CoreGameSignals.Instance.onStartLevelPlayer += OnStartLevelPlayer;
         }
 
         private void UnsubscribeEvents()
@@ -60,6 +69,7 @@ namespace Managers
             CoreGameSignals.Instance.onGetPlayerPosition += OnGetPlayerPosition;
             CoreGameSignals.Instance.onPozitionAndRotationFreeze -= OnPozitionAndRotationFreeze;
             CoreGameSignals.Instance.onPlayerMoveRotation -= OnPlayerMoveRotation;
+            CoreGameSignals.Instance.onStartLevelPlayer -= OnStartLevelPlayer;
         }
 
         private void OnDisable()
@@ -91,20 +101,25 @@ namespace Managers
             _playerRotation = PlayerHolder.transform.localRotation;
         }
 
-        private void OnPlayerMoveRotation()
+        public void OnPlayerMoveRotation()
         {
             PlayerHolder.transform.localRotation = _playerRotation;
             _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY |RigidbodyConstraints.FreezeRotationX;
             _player.useGravity = false;
         }
 
+        public void OnStartLevelPlayer()
+        {
+            PlayerHolder.transform.localPosition = new Vector3(0.0f, 0.0f, PlayerHolder.transform.position.z);
+            OnPlayerMoveRotation();
+        }
         
         private void OnGetPlayerPosition()
         {
             _playerPosition = PlayerHolder.transform.localPosition;
         }
 
-        private void OnPlayerMovePosition()
+        public void OnPlayerMovePosition()
         {
             PlayerHolder.transform.localPosition = _playerPosition;
         }

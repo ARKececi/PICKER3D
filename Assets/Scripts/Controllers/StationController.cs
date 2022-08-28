@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -12,10 +13,12 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
-                {
-                    StationBool = true
-                });
+                DOVirtual.DelayedCall(0.05f, () =>
+                    CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
+                    {
+                        StationBool = true
+                    }));
+
             }
         }
     }

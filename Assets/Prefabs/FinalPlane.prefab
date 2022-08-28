@@ -105,7 +105,6 @@ GameObject:
   m_Component:
   - component: {fileID: 872861448285827297}
   - component: {fileID: 4447978561806126759}
-  - component: {fileID: 7335822545955984733}
   m_Layer: 0
   m_Name: FinalStation
   m_TagString: WinStation
@@ -140,18 +139,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2, z: 0}
   m_Center: {x: 1, y: 1, z: 0}
---- !u!114 &7335822545955984733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3916749897659912901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2bf5be114f24d9c8d5bd9cc889e6a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4147388451742197382
 GameObject:
   m_ObjectHideFlags: 0
