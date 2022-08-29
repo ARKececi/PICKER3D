@@ -46,7 +46,7 @@ namespace Controllers
                     WinLevel = _levelID
                 });
                 
-                DOVirtual.DelayedCall(3, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
+                DOVirtual.DelayedCall(5.1f, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
                 CoreGameSignals.Instance.onNextLevelLoader?.Invoke();
                 
                 CoreGameSignals.Instance.onPozitionAndRotationFreeze?.Invoke();

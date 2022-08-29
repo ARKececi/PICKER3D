@@ -18,6 +18,6 @@ MonoBehaviour:
     - RequiredBallCount: 5
     - RequiredBallCount: 2
   - StageList:
-    - RequiredBallCount: 4
-    - RequiredBallCount: 3
+    - RequiredBallCount: 0
+    - RequiredBallCount: 1
     - RequiredBallCount: 0

@@ -5,6 +5,7 @@ using DG.Tweening;
 using Enums;
 using Keys;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -16,12 +17,16 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private UIPanelController panelcontroller;
+        
+        [SerializeField] private TextMeshProUGUI CurrentLevel;
+        
+        [SerializeField] private TextMeshProUGUI NextLevel;
 
         #endregion
 
         #region Private Variables
 
-
+        private int _level;
 
         #endregion
 
@@ -56,6 +61,21 @@ namespace Managers
         }
 
         #endregion
+
+        private void Start()
+        {
+            NextLevelText();
+        }
+
+        private void CurrentLevelText()
+        {
+            CurrentLevel.text = $"{_level}";
+        }
+
+        private void NextLevelText()
+        {
+            NextLevel.text = $"{_level+1}";
+        }
         
         private void OnPlay()
         {
@@ -77,6 +97,9 @@ namespace Managers
 
         private void OnWin()
         {
+            _level++;
+            CurrentLevelText();
+            NextLevelText();
             panelcontroller.OnOpenPanel(UIPanel.WinButton);
         }
         
@@ -95,7 +118,7 @@ namespace Managers
 
         public void Win()
         {
-
+            
             panelcontroller.OnClosePanel(UIPanel.WinButton);
             
             CoreGameSignals.Instance.onStartLevelPlayer?.Invoke();

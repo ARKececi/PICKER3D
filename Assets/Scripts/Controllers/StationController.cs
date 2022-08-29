@@ -13,7 +13,7 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                DOVirtual.DelayedCall(0.05f, () =>
+                DOVirtual.DelayedCall(0.1f, () =>
                     CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
                     {
                         StationBool = true

@@ -4,6 +4,7 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -33,10 +34,6 @@ namespace Managers
         private Vector3 _nextLevelTransform;
 
         private Vector3 _startLevelTransform;
-
-        private int _level;
-
-        private GameObject ResetLevel;
 
         #endregion
 
@@ -102,15 +99,9 @@ namespace Managers
         private void OnNextLevelLoader()
         {
             OnLoaderLevel();
-            _level++;
-            if (_level > 0)
-            {
-                levelHolder.transform.GetChild(1).position = _nextLevelTransform;
+            levelHolder.transform.GetChild(1).position = _nextLevelTransform;
                 _startLevelTransform = _nextLevelTransform;
                 _nextLevelTransform += new Vector3(0, 0, 430);
-                
-            }
-            ResetLevel = levelHolder;
         }
 
         private void OnResetLevel()
