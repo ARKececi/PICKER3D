@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enums;
+using Keys;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Controllers
 {
@@ -11,12 +13,20 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private List<GameObject> panels;
+        
+        [SerializeField] public List<Image> Images;
+
+        #endregion
+
+        #region Private Variables
+
+        private int _poolID;
 
         #endregion
 
         #endregion
 
-        public void OnOpenPanel(UIPanel panelParam)
+        public void OnOpenPanel(UIPanel panelParam )
         {
             panels[(int) panelParam].SetActive(true);
         }
@@ -24,6 +34,21 @@ namespace Controllers
         public void OnClosePanel(UIPanel panelParam)
         {
             panels[(int) panelParam].SetActive(false);
+        }
+        
+        public void OnOpenPoolPanel(int pool)
+        {
+            Debug.Log(pool);
+            Images[pool].enabled = true;
+        }
+
+        public void OnClosePoolPanel()
+        {
+            foreach (var image in Images)
+            {
+                image.enabled = false;
+            }
+            
         }
     }
 }

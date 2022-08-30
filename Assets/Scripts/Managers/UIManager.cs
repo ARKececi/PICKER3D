@@ -4,6 +4,7 @@ using Controllers;
 using DG.Tweening;
 using Enums;
 using Keys;
+using Microsoft.Unity.VisualStudio.Editor;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -28,6 +29,8 @@ namespace Managers
 
         private int _level;
 
+        private int _poolID;
+
         #endregion
 
         #endregion
@@ -45,6 +48,9 @@ namespace Managers
             UISignals.Instance.onFail += OnFail;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onWin += OnWin;
+            UISignals.Instance.onPoolEnable += OnPoolEnable;
+            CoreGameSignals.Instance.onPoolID += OnPoolID;
+            
         }
 
         private void UnsubscribeEvents()
@@ -53,6 +59,9 @@ namespace Managers
             UISignals.Instance.onFail -= OnFail;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onWin -= OnWin;
+            UISignals.Instance.onPoolEnable -= OnPoolEnable;
+            CoreGameSignals.Instance.onPoolID -= OnPoolID;
+
         }
 
         private void OnDisable()
@@ -65,6 +74,7 @@ namespace Managers
         private void Start()
         {
             NextLevelText();
+            OnPoolDisable();
         }
 
         private void CurrentLevelText()
@@ -90,19 +100,6 @@ namespace Managers
             panelcontroller.OnClosePanel(UIPanel.StartButton);
         }
 
-        private void OnFail()
-        {
-            panelcontroller.OnOpenPanel(UIPanel.FailButton);
-        }
-
-        private void OnWin()
-        {
-            _level++;
-            CurrentLevelText();
-            NextLevelText();
-            panelcontroller.OnOpenPanel(UIPanel.WinButton);
-        }
-        
         private void OnReset()
         {
             CoreGameSignals.Instance.onClearLevel?.Invoke();
@@ -124,12 +121,43 @@ namespace Managers
             CoreGameSignals.Instance.onStartLevelPlayer?.Invoke();
 
             CoreGameSignals.Instance.onGetCameraPosition?.Invoke();
-            CoreGameSignals.Instance.onGetPlayerPosition?.Invoke(); 
-            
+            CoreGameSignals.Instance.onGetPlayerPosition?.Invoke();
+
             CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
             {
                 StationBool = false
             });
+        }
+
+        public void OnPoolID(PoolPanelParams poolPanelParams)
+        {
+            _poolID = poolPanelParams.PoolID;
+        }
+
+        private void OnPoolEnable()
+        {
+            panelcontroller.OnOpenPoolPanel(_poolID);
+        }
+
+        private void OnPoolDisable()
+        {
+            panelcontroller.OnClosePoolPanel();
+        }
+        
+        private void OnWin()
+        {
+            _level++;
+            
+            CurrentLevelText();
+            NextLevelText();
+            OnPoolDisable();
+            
+            panelcontroller.OnOpenPanel(UIPanel.WinButton);
+        }
+        
+        private void OnFail()
+        {
+            panelcontroller.OnOpenPanel(UIPanel.FailButton);
         }
         
         public void Play()
@@ -139,6 +167,7 @@ namespace Managers
 
         public void Reset()
         {
+            OnPoolDisable();
             CoreGameSignals.Instance.onReset?.Invoke();
         }
     }

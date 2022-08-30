@@ -28,7 +28,7 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private int stageID;
+        [SerializeField] public int stageID;
 
         [SerializeField] private TextMeshPro text;
         
@@ -80,6 +80,8 @@ namespace Controllers
         {
             if (_ballCount >= PoolData.RequiredBallCount)
             {
+                UISignals.Instance.onPoolEnable?.Invoke();
+
                 animationList.DOPlay();
                 BallSetActive();
                 DOVirtual.DelayedCall(2, () =>
@@ -87,11 +89,7 @@ namespace Controllers
                     {
                         StationBool = false
                     }));
-                
-                Debug.Log("başarılı");
-                
-                Debug.Log(_ballCount);
-                
+
             }
 
             else
@@ -99,8 +97,6 @@ namespace Controllers
                 UISignals.Instance.onFail?.Invoke();
             }
             OnBallCountZero();
-            
-            Debug.Log(_ballCount);
         }
 
         private void OnBallCountZero()

@@ -14,7 +14,8 @@ namespace Signals
         public UnityAction onReset = delegate { };
         public UnityAction onWin = delegate { };
         public UnityAction<WinLevelParams> onWinLevelID = delegate { };
-
+        public UnityAction<PoolPanelParams> onPoolID = delegate { };
+        
         public UnityAction onLoaderLevel = delegate { };
         public UnityAction onNextLevelLoader = delegate { };
         public UnityAction onResetLevel = delegate { };

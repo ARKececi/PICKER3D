@@ -22,7 +22,14 @@ namespace Controllers
         {
             if (other.CompareTag("Station"))    
             {
+                
+                CoreGameSignals.Instance.onPoolID(new PoolPanelParams()
+                {
+                    PoolID = other.transform.parent.GetComponent<PoolController>().stageID
+                });
+                
                 DOVirtual.DelayedCall(2, other.transform.parent.GetComponent<PoolController>().OnBallController);
+
             }
 
             if (other.CompareTag("LevelStart"))
