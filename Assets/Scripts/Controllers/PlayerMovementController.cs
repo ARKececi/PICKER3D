@@ -1,8 +1,6 @@
-﻿using System;
-using Data.UnityObject;
+﻿using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
-using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -13,15 +11,15 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private Rigidbody _move;
+        [SerializeField] private Rigidbody move;
 
-        [SerializeField] private GameObject _player;
-        
-        [Header("Data")] public PlayerData _playerControllerData;
+        [SerializeField] private GameObject player;
 
         #endregion
 
         #region Private Variables
+
+        [Header("Data")] private PlayerData _playerControllerData;
 
         private float _inputforce;
 
@@ -44,17 +42,21 @@ namespace Controllers
             _playerControllerData = GetInputData();
         }
 
-        private PlayerData GetInputData() => Resources.Load<SO_Player>("Data/SO_Player").playerData;
+        private PlayerData GetInputData()
+        {
+            return Resources.Load<SO_Player>("Data/SO_Player").playerData;
+        }
 
         public Rigidbody rigidbody()
         {
-            return _move;
+            return move;
         }
+
         public void IsTouchingPlayer(IsTouching touchparams)
         {
             _isTouchingPlayer = touchparams.IsTouchingPlayer;
         }
-        
+
         public void movementcontroller(HorizontalInputParams inputParams)
         {
             _inputforce = inputParams.XValue;
@@ -65,15 +67,13 @@ namespace Controllers
         {
             _stationBool = station.StationBool;
             Debug.Log(_stationBool);
-            
         }
 
         public void PlayerRotationClamp()
         {
-            Vector3 currentRotation = _player.transform.localEulerAngles;
+            var currentRotation = player.transform.localEulerAngles;
             currentRotation.x = Mathf.Clamp(currentRotation.x, -35, 15);
-            _player.transform.eulerAngles = currentRotation;
-            
+            player.transform.eulerAngles = currentRotation;
         }
 
         private void FixedUpdate()
@@ -82,27 +82,18 @@ namespace Controllers
             {
                 if (!_stationBool)
                 {
-                    _move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide,_move.velocity.y,_playerControllerData.MoveSpeed);
-                    _move.position = new Vector3(Mathf.Clamp(_move.position.x, _clamp.x, _clamp.y), _move.position.y, _move.position.z); // clamp 
-                    
-                    if (_player.transform.eulerAngles.x < 60)
-                    {
-                        PlayerRotationClamp();
-                    }
-                        
+                    move.velocity = new Vector3(_inputforce * _playerControllerData._movementSide, move.velocity.y,
+                        _playerControllerData.MoveSpeed);
+                    move.position = new Vector3(Mathf.Clamp(move.position.x, _clamp.x, _clamp.y), move.position.y,
+                        move.position.z); // clamp 
 
+                    if (player.transform.eulerAngles.x < 60) PlayerRotationClamp();
                 }
                 else
                 {
-                    _move.velocity = Vector3.zero;
+                    move.velocity = Vector3.zero;
                 }
             }
-            
-        }
-
-        private void move()
-        {
-            
         }
     }
 }

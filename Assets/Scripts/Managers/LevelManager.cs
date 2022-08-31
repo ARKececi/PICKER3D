@@ -4,6 +4,7 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
 using Signals;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Managers
 
         #region Private Variables
 
-        [SerializeField] private int _levelID;
+        [ShowInInspector] private int _levelID;
 
         private Vector3 _nextLevelTransform;
 

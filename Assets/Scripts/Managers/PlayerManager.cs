@@ -14,12 +14,11 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController playerMovementController;
-        
-        [SerializeField] private GameObject PlayerHolder;
-        
-        [SerializeField] private PlayerLoaderCommand PlayerLoader;
 
-        [SerializeField] private DOTweenAnimation Animation;
+        [SerializeField] private GameObject playerHolder;
+
+        [SerializeField] public PlayerLoaderCommand playerLoader;
+
 
         #endregion
 
@@ -32,8 +31,6 @@ namespace Managers
         #endregion
 
         #region Public Variables
-
-        
 
         #endregion
 
@@ -88,47 +85,47 @@ namespace Managers
 
         private void OnPozitionAndRotationFreeze()
         {
-            
             _player = playerMovementController.rigidbody();
             _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-            
-            
+
+
             _player.useGravity = true;
         }
-        
+
         private void OnGetPlayerRotation()
         {
-            _playerRotation = PlayerHolder.transform.localRotation;
+            _playerRotation = playerHolder.transform.localRotation;
         }
 
         public void OnPlayerMoveRotation()
         {
-            PlayerHolder.transform.localRotation = _playerRotation;
-            _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY |RigidbodyConstraints.FreezeRotationX;
+            playerHolder.transform.localRotation = _playerRotation;
+            _player.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ |
+                                  RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX;
             _player.useGravity = false;
         }
 
         public void OnStartLevelPlayer()
         {
-            PlayerHolder.transform.localPosition = new Vector3(0.0f, 0.0f, PlayerHolder.transform.position.z);
+            playerHolder.transform.localPosition = new Vector3(0.0f, 0.0f, playerHolder.transform.position.z);
             OnPlayerMoveRotation();
         }
-        
+
         private void OnGetPlayerPosition()
         {
-            _playerPosition = PlayerHolder.transform.localPosition;
+            _playerPosition = playerHolder.transform.localPosition;
         }
 
         public void OnPlayerMovePosition()
         {
-            PlayerHolder.transform.localPosition = _playerPosition;
+            playerHolder.transform.localPosition = _playerPosition;
         }
 
         private void OnLoaderPlayer()
         {
-            PlayerLoader.LoaderPlayer(PlayerHolder.transform);
+            playerLoader.LoaderPlayer(playerHolder.transform);
         }
-        
+
         private void onTouching(IsTouching isTouchparams)
         {
             playerMovementController.IsTouchingPlayer(isTouchparams);
@@ -143,7 +140,5 @@ namespace Managers
         {
             playerMovementController.station(stationBoolParams);
         }
-        
-        
     }
 }

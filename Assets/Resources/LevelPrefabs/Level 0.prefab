@@ -4324,6 +4324,62 @@ PrefabInstance:
       propertyPath: onStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463168048530679, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463169415004563, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463169415004563, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030463169415004563, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063645710178062640, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: autoPlay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063645710178062640, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: easeType
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063645710178062640, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: endValueV3.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063645710178062640, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: endValueV3.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063645710178062640, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
+      propertyPath: optionalRotationMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bfaa83fb37fa604f992cf602122bf21, type: 3}
 --- !u!114 &9097341831414945539 stripped

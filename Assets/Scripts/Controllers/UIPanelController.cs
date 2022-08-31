@@ -38,7 +38,6 @@ namespace Controllers
         
         public void OnOpenPoolPanel(int pool)
         {
-            Debug.Log(pool);
             Images[pool].enabled = true;
         }
 

@@ -8,7 +8,6 @@ namespace Controllers
 {
     public class StationController : MonoBehaviour
     {
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -18,7 +17,6 @@ namespace Controllers
                     {
                         StationBool = true
                     }));
-
             }
         }
     }

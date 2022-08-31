@@ -18,9 +18,7 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private UIPanelController panelcontroller;
-        
         [SerializeField] private TextMeshProUGUI CurrentLevel;
-        
         [SerializeField] private TextMeshProUGUI NextLevel;
 
         #endregion
@@ -28,13 +26,12 @@ namespace Managers
         #region Private Variables
 
         private int _level;
-
         private int _poolID;
 
         #endregion
 
         #endregion
-        
+
         #region Event Subscription
 
         private void OnEnable()
@@ -50,7 +47,6 @@ namespace Managers
             CoreGameSignals.Instance.onWin += OnWin;
             UISignals.Instance.onPoolEnable += OnPoolEnable;
             CoreGameSignals.Instance.onPoolID += OnPoolID;
-            
         }
 
         private void UnsubscribeEvents()
@@ -61,7 +57,6 @@ namespace Managers
             CoreGameSignals.Instance.onWin -= OnWin;
             UISignals.Instance.onPoolEnable -= OnPoolEnable;
             CoreGameSignals.Instance.onPoolID -= OnPoolID;
-
         }
 
         private void OnDisable()
@@ -84,19 +79,13 @@ namespace Managers
 
         private void NextLevelText()
         {
-            NextLevel.text = $"{_level+1}";
+            NextLevel.text = $"{_level + 1}";
         }
-        
+
         private void OnPlay()
         {
-            CoreGameSignals.Instance.onIsTouching.Invoke(new IsTouching()
-            {
-                IsTouchingPlayer = true
-            });
-            CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
-            {
-                StationBool = false
-            });
+            CoreGameSignals.Instance.onIsTouching.Invoke(new IsTouching() { IsTouchingPlayer = true });
+            CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams() { StationBool = false });
             panelcontroller.OnClosePanel(UIPanel.StartButton);
         }
 
@@ -104,29 +93,20 @@ namespace Managers
         {
             CoreGameSignals.Instance.onClearLevel?.Invoke();
             CoreGameSignals.Instance.onResetLevel?.Invoke();
-            
             CoreGameSignals.Instance.onCameraMovePosition?.Invoke();
             CoreGameSignals.Instance.onPlayerMovePosition?.Invoke();
             //CoreGameSignals.Instance.onPlayerMoveRotation?.Invoke();
-            
             panelcontroller.OnClosePanel(UIPanel.FailButton);
             panelcontroller.OnOpenPanel(UIPanel.StartButton);
         }
 
         public void Win()
         {
-            
             panelcontroller.OnClosePanel(UIPanel.WinButton);
-            
             CoreGameSignals.Instance.onStartLevelPlayer?.Invoke();
-
             CoreGameSignals.Instance.onGetCameraPosition?.Invoke();
             CoreGameSignals.Instance.onGetPlayerPosition?.Invoke();
-
-            CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams()
-            {
-                StationBool = false
-            });
+            CoreGameSignals.Instance.onStation.Invoke(new StationBoolParams() { StationBool = false });
         }
 
         public void OnPoolID(PoolPanelParams poolPanelParams)
@@ -143,23 +123,21 @@ namespace Managers
         {
             panelcontroller.OnClosePoolPanel();
         }
-        
+
         private void OnWin()
         {
             _level++;
-            
             CurrentLevelText();
             NextLevelText();
             OnPoolDisable();
-            
             panelcontroller.OnOpenPanel(UIPanel.WinButton);
         }
-        
+
         private void OnFail()
         {
             panelcontroller.OnOpenPanel(UIPanel.FailButton);
         }
-        
+
         public void Play()
         {
             CoreGameSignals.Instance.onPlay?.Invoke();

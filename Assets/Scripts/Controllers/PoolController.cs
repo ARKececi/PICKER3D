@@ -29,12 +29,9 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] public int stageID;
-
         [SerializeField] private TextMeshPro text;
-        
-        [SerializeField] private DOTweenAnimation animationList;
-        
-        [SerializeField] private GameObject Ball;
+        [SerializeField] private List<DOTweenAnimation> animationList;
+        [SerializeField] private GameObject ball;
 
         #endregion
 
@@ -50,13 +47,15 @@ namespace Controllers
             SetRequiredBallCount();
         }
 
-        private StageData GetPoolData() => Resources.Load<SO_Level>("Data/SO_Level").Levels[CoreGameSignals.Instance.onPoolLevelID() % Resources.Load<SO_Level>("Data/SO_Level")
-            .Levels.Count].StageList[stageID];
+        private StageData GetPoolData() => Resources.Load<SO_Level>("Data/SO_Level")
+            .Levels[CoreGameSignals.Instance.onPoolLevelID() % Resources.Load<SO_Level>("Data/SO_Level").Levels.Count]
+            .StageList[stageID];
 
         private void SetRequiredBallCount()
         {
             text.text = $"0/{PoolData.RequiredBallCount}";
         }
+
         private void CountBall()
         {
             text.text = $"{_ballCount}/{PoolData.RequiredBallCount}";
@@ -64,9 +63,9 @@ namespace Controllers
 
         private void BallSetActive()
         {
-            Ball.SetActive(false);
+            ball.SetActive(false);
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Ball"))
@@ -81,21 +80,20 @@ namespace Controllers
             if (_ballCount >= PoolData.RequiredBallCount)
             {
                 UISignals.Instance.onPoolEnable?.Invoke();
+                foreach (var animation in animationList)
+                {
+                    animation.DOPlay();
+                }
 
-                animationList.DOPlay();
                 BallSetActive();
-                DOVirtual.DelayedCall(2, () =>
-                    CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams()
-                    {
-                        StationBool = false
-                    }));
-
+                DOVirtual.DelayedCall(2,
+                    () => CoreGameSignals.Instance.onStation?.Invoke(new StationBoolParams() { StationBool = false }));
             }
-
             else
             {
                 UISignals.Instance.onFail?.Invoke();
             }
+
             OnBallCountZero();
         }
 
@@ -103,6 +101,5 @@ namespace Controllers
         {
             _ballCount = 0;
         }
-        
     }
 }

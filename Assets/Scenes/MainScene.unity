@@ -1474,11 +1474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bf3034c2e34fa99a8b993781353124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _move: {fileID: 851898193}
-  _player: {fileID: 851898191}
-  _playerControllerData:
-    _movementSide: 10
-    MoveSpeed: 100
+  move: {fileID: 851898193}
+  player: {fileID: 851898191}
 --- !u!114 &851898195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,9 +1501,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovementController: {fileID: 851898194}
-  PlayerHolder: {fileID: 851898191}
-  PlayerLoader: {fileID: 851898195}
-  Animation: {fileID: 1028234928421102404, guid: 4a5999128623b174198b68d3722dacd0, type: 3}
+  playerHolder: {fileID: 851898191}
+  playerLoader: {fileID: 851898195}
 --- !u!1 &890659423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,7 +2093,6 @@ MonoBehaviour:
   levelHolder: {fileID: 546260368}
   levelLoader: {fileID: 1291353216}
   clearlevel: {fileID: 1291353218}
-  _levelID: 0
 --- !u!114 &1291353218
 MonoBehaviour:
   m_ObjectHideFlags: 0
