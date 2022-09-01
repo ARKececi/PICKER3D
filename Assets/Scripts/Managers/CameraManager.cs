@@ -1,6 +1,7 @@
 ﻿using System;
 using Cinemachine;
 using Controllers;
+using Enums;
 using Signals;
 using UnityEngine;
 
@@ -14,13 +15,14 @@ namespace Managers
 
         private Vector3 _vmCameraPosition;
 
+        private StateCamera _cameraState;
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private CinemachineVirtualCamera _vmcamera;
-
         [SerializeField] private CinemachineStateDrivenCamera _vmStateCamera;
+
+        [SerializeField] private Animator _animator;
 
         #endregion
 
@@ -43,13 +45,15 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onCameraMovePosition += OnCameraMovePosition;
             CoreGameSignals.Instance.onGetCameraPosition += OnGetCameraPosition;
+            CoreGameSignals.Instance.onEnterFinisStation += OnEnterFinisStation;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onCameraMovePosition -= OnCameraMovePosition;
-            CoreGameSignals.Instance.onGetCameraPosition += OnGetCameraPosition;
+            CoreGameSignals.Instance.onGetCameraPosition -= OnGetCameraPosition;
+            CoreGameSignals.Instance.onEnterFinisStation -= OnEnterFinisStation;
         }
 
         private void OnDisable()
@@ -59,14 +63,32 @@ namespace Managers
 
         #endregion
 
+        private void OnEnterFinisStation()
+        {
+            switch (_cameraState)
+            {
+            case StateCamera.Runner:
+                _cameraState = StateCamera.Init; 
+                _animator.SetTrigger(_cameraState.ToString());
+                break;
+            
+            
+            case StateCamera.Init:
+                _cameraState = StateCamera.Runner; 
+                _animator.SetTrigger(_cameraState.ToString());
+                break;
+            }
+            
+        }
+        
         private void OnGetCameraPosition()
         {
-            _vmCameraPosition = _vmcamera.transform.localPosition;
+            _vmCameraPosition = transform.localPosition;
         }
 
         private void OnCameraMovePosition()
         {
-            _vmcamera.transform.localPosition = _vmCameraPosition;
+            transform.localPosition = _vmCameraPosition;
         }
 
         private void OnPlay()

@@ -43,7 +43,7 @@ namespace Controllers
                 //DOVirtual.DelayedCall(1, () => CoreGameSignals.Instance.onStartLevelPlayer?.Invoke());
                 CoreGameSignals.Instance.onWin?.Invoke();
             }
-
+            // level işlemleri level managerin içerisinde olur.
             if (other.CompareTag(("WinStation")))
             {
                 _levelID = CoreGameSignals.Instance.onPoolLevelID();
@@ -52,7 +52,7 @@ namespace Controllers
                 {
                     WinLevel = _levelID
                 });
-                
+                CoreGameSignals.Instance.onEnterFinisStation?.Invoke();
                 DOVirtual.DelayedCall(5.1f, () => CoreGameSignals.Instance.onClearLevel?.Invoke()); 
                 CoreGameSignals.Instance.onNextLevelLoader?.Invoke();
                 

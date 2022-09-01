@@ -2,6 +2,7 @@
 {
     public enum StateCamera
     {
-        Runner
+        Runner,
+        Init
     }
 }

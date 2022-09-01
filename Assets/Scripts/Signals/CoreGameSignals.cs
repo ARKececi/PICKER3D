@@ -21,6 +21,8 @@ namespace Signals
         public UnityAction onResetLevel = delegate { };
         public UnityAction onClearLevel = delegate { };
         public UnityAction onLoaderPlayer = delegate { };
+        
+        public UnityAction onEnterFinisStation = delegate { };
 
         public UnityAction onPozitionAndRotationFreeze = delegate { };
 
