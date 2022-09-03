@@ -20,8 +20,11 @@ namespace Signals
         public UnityAction onNextLevelLoader = delegate { };
         public UnityAction onResetLevel = delegate { };
         public UnityAction onClearLevel = delegate { };
+        public UnityAction onWinStation = delegate { };
         public UnityAction onLoaderPlayer = delegate { };
         
+        public UnityAction<SaveDataParams> onSaveGame = delegate { };
+
         public UnityAction onEnterFinisStation = delegate { };
 
         public UnityAction onPozitionAndRotationFreeze = delegate { };

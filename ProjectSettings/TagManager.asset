@@ -10,6 +10,7 @@ TagManager:
   - LevelStart
   - PlayerController
   - PlayerBack
+  - TunnelStation
   layers:
   - Default
   - TransparentFX

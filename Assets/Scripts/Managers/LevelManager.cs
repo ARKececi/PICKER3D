@@ -2,6 +2,7 @@
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -32,6 +33,8 @@ namespace Managers
 
         [ShowInInspector] private int _levelID;
 
+        private int _levelCount;
+
         private Vector3 _nextLevelTransform;
 
         private Vector3 _startLevelTransform;
@@ -52,9 +55,9 @@ namespace Managers
             CoreGameSignals.Instance.onPoolLevelID += OnPoolLevelID;
             CoreGameSignals.Instance.onLoaderLevel += OnLoaderLevel;
             CoreGameSignals.Instance.onClearLevel += OnClearLevel;
-            CoreGameSignals.Instance.onWinLevelID += WinLevelID;
             CoreGameSignals.Instance.onNextLevelLoader += OnNextLevelLoader;
             CoreGameSignals.Instance.onResetLevel += OnResetLevel;
+            CoreGameSignals.Instance.onWinStation += OnWinStation;
         }
 
         private void UnsubscribeEvents()
@@ -62,9 +65,9 @@ namespace Managers
             CoreGameSignals.Instance.onPoolLevelID -= OnPoolLevelID;
             CoreGameSignals.Instance.onLoaderLevel -= OnLoaderLevel;
             CoreGameSignals.Instance.onClearLevel -= OnClearLevel;
-            CoreGameSignals.Instance.onWinLevelID -= WinLevelID;
             CoreGameSignals.Instance.onNextLevelLoader -= OnNextLevelLoader;
             CoreGameSignals.Instance.onResetLevel += OnResetLevel;
+            CoreGameSignals.Instance.onWinStation += OnWinStation;
         }
 
         private void OnDisable()
@@ -73,6 +76,18 @@ namespace Managers
         }
 
         #endregion
+        
+        private void Awake()
+        {
+            _levelCount = GetActiveLevel();
+            Debug.Log(_levelCount);
+        }
+        
+        private int GetActiveLevel()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
+        }
 
         private int OnPoolLevelID()
         {
@@ -81,18 +96,20 @@ namespace Managers
 
         private void Start()
         {
+            WinLevelID();
             OnLoaderLevel();
             _nextLevelTransform = new Vector3(0, 0, 435);
         }
         
-        private void WinLevelID(WinLevelParams levelID)
+        private void WinLevelID()
         {
-            _levelID = levelID.WinLevel % Resources.Load<SO_Level>("Data/SO_Level")
+            _levelID = _levelCount % Resources.Load<SO_Level>("Data/SO_Level")
                 .Levels.Count;
         }
 
         private void OnLoaderLevel()
         {
+            
             levelLoader.LoaderLevel(_levelID, levelHolder.transform);
             
         }
@@ -103,12 +120,22 @@ namespace Managers
             levelHolder.transform.GetChild(1).position = _nextLevelTransform;
                 _startLevelTransform = _nextLevelTransform;
                 _nextLevelTransform += new Vector3(0, 0, 430);
+                CoreGameSignals.Instance.onSaveGame?.Invoke(new SaveDataParams()
+                {
+                    Level = _levelCount
+                });
+                Debug.Log(_levelCount);
         }
 
         private void OnResetLevel()
         {
             OnLoaderLevel();
             levelHolder.transform.GetChild(1).position = _startLevelTransform;
+            CoreGameSignals.Instance.onSaveGame?.Invoke(new SaveDataParams()
+            {
+                Level = _levelCount
+            });
+            Debug.Log(_levelCount);
         }
 
         private void OnClearLevel()
@@ -116,6 +143,14 @@ namespace Managers
             clearlevel.ClearLevel(levelHolder.transform);
         }
 
+        private void OnWinStation()
+        {
+            _levelCount += 1;
+            WinLevelID();
+            DOVirtual.DelayedCall(5.1f, OnClearLevel);
+            OnNextLevelLoader();
+            CoreGameSignals.Instance.onPozitionAndRotationFreeze?.Invoke();
 
+        }
     }
 }

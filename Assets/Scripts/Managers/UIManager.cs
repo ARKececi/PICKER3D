@@ -25,7 +25,7 @@ namespace Managers
 
         #region Private Variables
 
-        private int _level;
+        private int _levelCount;
         private int _poolID;
 
         #endregion
@@ -65,21 +65,29 @@ namespace Managers
         }
 
         #endregion
+        
+        private void Awake()
+        {
+            _levelCount = GetActiveLevel();
+            Debug.Log(_levelCount);
+        }
+        
+        private int GetActiveLevel()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
+        }
 
         private void Start()
         {
-            NextLevelText();
+            SetLevelText();
             OnPoolDisable();
         }
 
-        private void CurrentLevelText()
+        private void SetLevelText()
         {
-            CurrentLevel.text = $"{_level}";
-        }
-
-        private void NextLevelText()
-        {
-            NextLevel.text = $"{_level + 1}";
+            CurrentLevel.text = $"{_levelCount}";
+            NextLevel.text = $"{_levelCount + 1}";
         }
 
         private void OnPlay()
@@ -126,9 +134,8 @@ namespace Managers
 
         private void OnWin()
         {
-            _level++;
-            CurrentLevelText();
-            NextLevelText();
+            _levelCount++;
+            SetLevelText();
             OnPoolDisable();
             panelcontroller.OnOpenPanel(UIPanel.WinButton);
         }
